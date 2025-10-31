@@ -6,76 +6,110 @@
         <title>Smart Taxi Dispatcher</title>
         <!-- Tailwind CDN -->
         <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Main CSS File -->
-        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <div class="container py-8">
-            <h1 class="text-3xl text-center mb-4">Smart Taxi Dispatcher</h1>
-            <div class="content">
-                <h2 class="text-2xl text-center mb-2">List of Taxis</h2>
+        <header class="py-3 bg-[#2196f3] text-white">
+            <h1 class="text-3xl text-center">Smart Taxi Dispatcher</h1>
+        </header>
+        <div class="container py-10 mx-auto">
+            <div class="content flex gap-[30px]">
                 <div
-                    class="taxi-list relative flex flex-col w-full h-full overflow-hidden text-gray-700 bg-white shadow-md rounded-xl bg-clip-border mb-4"
+                    class="taxis-list relative flex flex-col w-[600px] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
                 >
-                    <table class="w-full text-left table-auto min-w-max">
+                    <h2 class="text-xl text-center font-bold mb-2">
+                        List of Taxis
+                    </h2>
+                    <table class="w-full text-center table-auto min-w-max">
                         <thead>
                             <tr>
                                 <th
-                                    class="p-4 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
                                 >
                                     Taxi ID
                                 </th>
                                 <th
-                                    class="p-4 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
                                 >
                                     Availability
                                 </th>
                                 <th
-                                    class="p-4 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
                                 >
                                     Position
+                                </th>
+                                <th
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                >
+                                    Time Remaining
+                                </th>
+                                <th
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                >
+                                    Total Rides
                                 </th>
                             </tr>
                         </thead>
                         <tbody id="table-body"></tbody>
                     </table>
                 </div>
-                <div class="request">
-                    <h2 class="text-2xl text-center mb-2">Demande Taxi</h2>
+                <div
+                    class="requests-list relative flex flex-col w-[600px] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
+                >
+                    <h2 class="text-xl text-center font-bold mb-2">
+                        Requests Waiting Queue
+                    </h2>
+                    <table class="w-full text-center table-auto min-w-max">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                >
+                                    Request ID
+                                </th>
+                                <th
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                >
+                                    Position
+                                </th>
+                                <th
+                                    class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                >
+                                    Duration
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="queue-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="options">
+                <h2 class="text-2xl text-center mb-2">Management</h2>
 
-                    <div class="form">
-                        <div class="w-full max-w-sm min-w-[200px] mb-2">
-                            <input
-                                class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                                placeholder="Type votre position"
-                                id="user-position"
-                            />
-                        </div>
-
-                        <div class="w-full max-w-sm min-w-[200px] mb-2">
-                            <input
-                                class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                                placeholder="Type votre duration"
-                                id="user-duration"
-                            />
-                        </div>
-
-                        <div class="w-full max-w-sm min-w-[200px] mb-2">
-                            <input
-                                class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                                placeholder="Type time"
-                                id="user-time"
-                            />
-                        </div>
-
-                        <button
-                            class="rounded bg-slate-800 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button"
-                            id="btn"
-                        >
-                            Invite
-                        </button>
+                <div class="form w-[500px] mx-auto">
+                    <div class="w-full max-w-sm mb-2">
+                        <input
+                            type="number"
+                            class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                            placeholder="Type your position"
+                            id="user-position"
+                        />
                     </div>
+
+                    <div class="w-full max-w-sm mb-2">
+                        <input
+                            type="number"
+                            class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                            placeholder="Type your duration"
+                            id="user-duration"
+                        />
+                    </div>
+
+                    <button
+                        class="bg-[#2196f3] text-white px-4 py-2 rounded-md block mx-auto"
+                        id="new-req"
+                    >
+                        New Request
+                    </button>
                 </div>
             </div>
         </div>
