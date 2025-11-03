@@ -12,9 +12,9 @@
             <h1 class="text-3xl text-center">Smart Taxi Dispatcher</h1>
         </header>
         <div class="container py-10 mx-auto">
-            <div class="content flex gap-[30px]">
+            <div class="content flex justify-between mb-2">
                 <div
-                    class="taxis-list relative flex flex-col w-[600px] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
+                    class="taxis-list relative flex flex-col w-[55%] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
                 >
                     <h2 class="text-xl text-center font-bold mb-2">
                         List of Taxis
@@ -53,7 +53,7 @@
                     </table>
                 </div>
                 <div
-                    class="requests-list relative flex flex-col w-[600px] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
+                    class="requests-list relative flex flex-col w-[42%] h-full overflow-hidden text-gray-700 bg-white border rounded-xl bg-clip-border mb-4 mx-auto"
                 >
                     <h2 class="text-xl text-center font-bold mb-2">
                         Requests Waiting Queue
@@ -83,33 +83,128 @@
                 </div>
             </div>
             <div class="options">
-                <h2 class="text-2xl text-center mb-2">Management</h2>
+                <h2 class="text-2xl text-center mb-4">Management</h2>
 
-                <div class="form w-[500px] mx-auto">
-                    <div class="w-full max-w-sm mb-2">
-                        <input
-                            type="number"
-                            class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                            placeholder="Type your position"
-                            id="user-position"
-                        />
-                    </div>
-
-                    <div class="w-full max-w-sm mb-2">
-                        <input
-                            type="number"
-                            class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                            placeholder="Type your duration"
-                            id="user-duration"
-                        />
-                    </div>
-
+                <div class="buttons flex justify-center gap-4">
                     <button
-                        class="bg-[#2196f3] text-white px-4 py-2 rounded-md block mx-auto"
-                        id="new-req"
+                        class="bg-[#2196f3] w-[130px] text-white px-4 py-2 rounded-md"
+                        id="req-popup-btn"
                     >
                         New Request
                     </button>
+                    <button
+                        class="bg-[#9E9E9E] w-[130px] text-white px-4 py-2 rounded-md"
+                        id="stats-popup-btn"
+                    >
+                        Statistics
+                    </button>
+                </div>
+
+                <!-- New Request Pop up  -->
+                <div
+                    class="pop-up fixed bg-[#00000082] w-full h-full top-0 left-0 flex justify-center items-center hidden"
+                    id="req-popup"
+                >
+                    <div class="content bg-white p-4 rounded-md">
+                        <div class="form w-[500px] mx-auto">
+                            <div class="w-full max-w-sm mb-2">
+                                <input
+                                    type="number"
+                                    class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                                    placeholder="Type your position"
+                                    id="user-position"
+                                />
+                            </div>
+
+                            <div class="w-full max-w-sm mb-2">
+                                <input
+                                    type="number"
+                                    class="w-[500px] bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                                    placeholder="Type your duration"
+                                    id="user-duration"
+                                />
+                            </div>
+
+                            <div class="flex justify-center gap-3 mt-4">
+                                <button
+                                    class="bg-[#2196f3] w-[140px] text-white px-4 py-2 rounded-md block"
+                                    id="new-req"
+                                >
+                                    New Request
+                                </button>
+                                <button
+                                    class="bg-[#F44336] w-[140px] text-white px-4 py-2 rounded-md block"
+                                    id="req-close-btn"
+                                >
+                                    Cancel Request
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Pop up -->
+                <div
+                    class="pop-up fixed bg-[#00000082] w-full h-full top-0 left-0 flex justify-center items-center hidden"
+                    id="stats-popup"
+                >
+                    <div class="content bg-white p-4 rounded-md">
+                        <h2 class="text-xl text-center font-bold mb-2">
+                            Company Statistics
+                        </h2>
+                        <table
+                            class="w-[400px] text-center table-auto min-w-max"
+                        >
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    >
+                                        Total Rides
+                                    </th>
+                                    <th
+                                        class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    >
+                                        Total Durations
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="company-stats"></tbody>
+                        </table>
+                        <h2 class="text-xl text-center font-bold mt-4 mb-2">
+                            Taxis Statistics
+                        </h2>
+                        <table
+                            class="w-[400px] text-center table-auto min-w-max"
+                        >
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    >
+                                        Taxi ID
+                                    </th>
+                                    <th
+                                        class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    >
+                                        Total Rides
+                                    </th>
+                                    <th
+                                        class="p-2 border-b border-blue-gray-100 bg-blue-gray-50"
+                                    >
+                                        Final Position
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="taxis-stats"></tbody>
+                        </table>
+                        <button
+                            class="block w-[100px] text-black border border-black px-4 py-2 mt-4 mx-auto rounded-md"
+                            id="stats-close-btn"
+                        >
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
